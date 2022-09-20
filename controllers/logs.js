@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Logs = require('../models/Logs.js');
+const Logs = require('../models/Logs')
 
 // Index
 
 // New
 router.get('/new', (req, res) => {
-  res.render('/New');
+  // const newLog = new Logs()
+  res.render('logs/New', {shipIsBroken});
 })
 
 // Delete
@@ -14,6 +15,11 @@ router.get('/new', (req, res) => {
 // Update
 
 // Create
+router.post('/', (req, res) => {
+  Logs.create(req.body, (error, createdLog) => {
+    res.redirect('/logs')
+  })
+  })
 
 // Edit
 

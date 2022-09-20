@@ -5,8 +5,8 @@ const Logs = require('../models/Logs.js');
 // Index
 
 // New
-router.get('logs/new', (req, res) => {
-  res.send('new');
+router.get('/new', (req, res) => {
+  res.render('/New');
 })
 
 // Delete

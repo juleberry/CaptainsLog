@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Flight = require('./models/Flight');
+const Logs = require('./models/Logs');
 
 // -------------------------
 // Mongoose Connection Stuff
@@ -41,7 +41,8 @@ app.use(express.urlencoded({extended:false}));
 // Routes
 // -------------------------
 
-
+const logsController = require('./controllers/logs');
+app.use('/logs', logsController);
 
 // ------------------
 // App Is Listening

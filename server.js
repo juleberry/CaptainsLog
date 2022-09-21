@@ -54,6 +54,15 @@ app.use(methodOverride('_method'));
 // -------------------------
 
 // Index
+app.get('/logs', (req, res) => {
+  Log.find({}, (error, allLogs) => {
+    res.render('logs/Index', {
+      logs: allLogs
+    });
+    console.log('Log Index Page')
+
+  })
+});
 
 // New
 app.get('/new', (req, res) => {

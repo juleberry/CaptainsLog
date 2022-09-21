@@ -65,16 +65,16 @@ app.get('/logs', (req, res) => {
 });
 
 // New
-app.get('/new', (req, res) => {
-  // const newLog = new Logs()
-  res.render('logs/New', {shipIsBroken});
+app.get('/logs/new', (req, res) => {
+  res.render('logs/new');
+  console.log('Make a New Log Form Page')
 })
 
 // Delete
 
 // Update
 
-// Create -- the POST route
+// Create -- create a new log; the POST route
 app.post('/logs', (req, res) => {
   if (req.body.shipIsBroken === 'on') {
     req.body.shipIsBroken = true;

@@ -2,9 +2,10 @@ const React = require("react");
 
 const Index = (props) => {
   return (
-    <div>
-      <h1>Log Index Page</h1>
-      <ul>
+    <div style={{fontFamily: "Tahoma", margin: "1rem"}}>
+      <h1>Captain's Log</h1>
+      <a href="/logs/new">Create a New Log!</a>
+      <ul style={{listStyleType: "square"}}>
         {props.logs.map((log, index) => {
           return (
             <li key={index}>

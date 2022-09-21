@@ -1,12 +1,18 @@
 // -------------------------
 // Require Statements
 // -------------------------
-
+// express makes http request
 const express = require('express');
+// creating express app
 const app = express();
+// use env variable (process.env.baseurl for example)
 require('dotenv').config();
+
 const mongoose = require('mongoose');
-const Logs = require('../models/Logs.js');
+// model
+const Log = require('./models/Log');
+// allows override of put 
+const methodOverride = require('method-override');
 
 // -------------------------
 // Mongoose Connection Stuff
@@ -34,15 +40,42 @@ app.engine('jsx', require('express-react-views').createEngine());
 // -------------------------
 // Setting Up Body Parser
 // -------------------------
-
+// reads the json
 app.use(express.urlencoded({extended:false}));
+
+// -------------------------
+// Method Override
+// -------------------------
+// overrides post request to a delete or update request
+app.use(methodOverride('_method'));
 
 // -------------------------
 // Routes
 // -------------------------
 
-const logsController = require('./controllers/logs');
-app.use('/logs', logsController);
+// Index
+
+// New
+router.get('/new', (req, res) => {
+  // const newLog = new Logs()
+  res.render('logs/New', {shipIsBroken});
+})
+
+// Delete
+
+// Update
+
+// Create
+router.post('/', (req, res) => {
+  Logs.create(req.body, (error, createdLog) => {
+    res.redirect('/logs')
+  })
+  })
+
+// Edit
+
+// Show
+
 
 // ------------------
 // App Is Listening

@@ -56,7 +56,7 @@ app.use(methodOverride('_method'));
 // Index
 
 // New
-router.get('/new', (req, res) => {
+app.get('/new', (req, res) => {
   // const newLog = new Logs()
   res.render('logs/New', {shipIsBroken});
 })
@@ -65,12 +65,20 @@ router.get('/new', (req, res) => {
 
 // Update
 
-// Create
-router.post('/', (req, res) => {
-  Logs.create(req.body, (error, createdLog) => {
+// Create -- the POST route
+app.post('/logs', (req, res) => {
+  if (req.body.shipIsBroken === 'on') {
+    req.body.shipIsBroken = true;
+  } else {
+    req.body.shipIsBroken = false;
+  }
+  Log.create(req.body, (error, createdLog) => {
     res.redirect('/logs')
+  //   res.redirect('/logs/Show')
+    console.log('Log Created')
+
   })
-  })
+});
 
 // Edit
 

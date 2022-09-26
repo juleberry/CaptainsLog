@@ -15,6 +15,8 @@ const Index = (props) => {
               <br />
               {log.shipIsBroken ? `Ship is Broken` : `Ship is not Broken`}
               <br />
+              <a href={`/logs/${log._id}/edit`}>Edit Log</a>
+              <br />
               <form action={`/logs/${log._id}?_method=DELETE`} method="POST" >
               <input type="submit" value="DELETE" />
               </form>

@@ -7,12 +7,12 @@ const express = require('express');
 const app = express();
 // use env variable (process.env.baseurl for example)
 require('dotenv').config();
-
 const mongoose = require('mongoose');
 // model
 const Log = require('./models/Log');
 // allows override of put 
 const methodOverride = require('method-override');
+const seedData = require('./models/seed')
 
 // -------------------------
 // Mongoose Connection Stuff
@@ -45,8 +45,58 @@ app.use(express.urlencoded({extended:false}));
 // overrides post request to a delete or update request
 app.use(methodOverride('_method'));
 
+// ---------------------
+// Seed Routes
+// ---------------------
+// dont forget to 'require' seedData
+// CLEAR DATABASE
+app.get('/logs/clear', (req, res) => {
+  Log.deleteMany({}, (error, data) => {
+    if (error) {
+      console.error(error)
+    } else {
+    res.json({
+      message: 'Cleared all logs'
+      })
+    }
+  })
+})
+
+// SEED DATABASE ROUTE
+// add all data to database
+app.get('/logs/seed', (req, res) => {
+  Log.insertMany(seedData, (error, created) => {
+    if (error) {
+      console.error(error)
+    } else {
+      res.json({
+        message: 'Seeded database'
+      })
+    }
+  })
+})
+
+// RESET DATABASE
+app.get('/logs/reset', (req, res) => {
+  Log.deleteMany({}, (error, data) => {
+    if (error) {
+      console.error(error)
+    } else {
+      Log.insertMany(seedData, (error, created) => {
+        if (error) {
+          console.error(error)
+        } else {
+          res.json({
+            message: 'Database has been reset'
+          })
+        }
+      })
+    }
+  })
+})
+
 // -------------------------
-// Routes
+// Main Routes
 // -------------------------
 
 // Index
@@ -94,6 +144,20 @@ app.post('/logs', (req, res) => {
 });
 
 // Edit
+app.get('/:id/edit', (req, res) => {
+  Log.findOne({
+    _id: req.params.id
+  }, (error, foundLog) => {
+    if (error) {
+      console.error(error);
+      res.json({
+        error: error
+      })
+    } else {
+      res.render('logs/Edit', { log: foundLog });
+    }
+  })
+});
 
 // Show
 app.get('/logs/:id', (req, res) => {

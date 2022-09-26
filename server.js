@@ -67,6 +67,14 @@ app.get('/logs/new', (req, res) => {
 })
 
 // Delete
+app.delete('/logs/:id', (req, res) => {
+  Log.deleteOne({
+    _id: req.params.id
+  }, (error, data) => {
+    console.log(data);
+    res.redirect('/logs');
+  })
+});
 
 // Update
 

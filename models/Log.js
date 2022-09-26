@@ -3,10 +3,10 @@ const Schema = mongoose.Schema; // create a shorthand for the mongoose Schema co
 const model = mongoose.model // shorthand for model function
 
 const logSchema = new Schema({
-    title: {type: String, required: true},
-    entry: {type: String, timestamps: true},
-    shipIsBroken: {type: Boolean, default: true},
-
+    title: { type: String, required: true },
+    entry: { type: String },
+    shipIsBroken: { type: Boolean, default: true },
+    // add in timestamps -- { timestamps: true }
     // comments: {type: String, required: false}
 })
 

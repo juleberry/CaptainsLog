@@ -88,7 +88,13 @@ app.post('/logs', (req, res) => {
 // Edit
 
 // Show
-
+app.get('/logs/:id', (req, res) => {
+  Log.findOne({ _id: req.params.id }, (error, foundLog) => {
+    res.render('logs/Show', {
+      log: foundLog
+    });
+  });
+});
 
 // ------------------
 // App Is Listening

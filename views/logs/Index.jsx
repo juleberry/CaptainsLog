@@ -1,14 +1,16 @@
+const express = require("express");
 const React = require("react");
 
 const Index = (props) => {
   return (
-    <div style={{fontFamily: "Tahoma", margin: "1rem"}}>
-      <h1>Captain's Log</h1>
-      <a href="/logs/new">Create a New Log!</a>
+    <div style={{fontFamily: "Tahoma", margin: "1rem", backgroundColor: "#FCF5E5", padding: ".5rem"}}>
+      <h1 style={{ color: "#873e23", textAlign: "center"}}>Captain's Log</h1>
+      <p style={{ textAlign: "center"}}>
+      <a href="/logs/new">Create a New Log</a></p>
       <ul style={{listStyleType: "square"}}>
         {props.logs.map((log, index) => {
           return (
-            <li key={index}>
+            <li style={{ padding: ".5rem" }} key={index}>
               <a href={`/logs/${log._id}`}> {log.title}</a>
               <br />
               {log.entry}
@@ -20,12 +22,12 @@ const Index = (props) => {
               <form action={`/logs/${log._id}?_method=DELETE`} method="POST" >
               <input type="submit" value="DELETE" />
               </form>
-              {/* <a href={`/fruits/${fruit._id}/edit`}>Edit This Fruit</a> */}
             </li>
           );
         })}
       </ul>
     </div>
+
   );
 };
 

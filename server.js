@@ -127,6 +127,25 @@ app.delete('/logs/:id', (req, res) => {
 });
 
 // Update
+app.put('/logs/:id', (req, res) => {
+  if (req.body.shipIsBroken === 'on') {
+    req.body.shipIsBroken = true
+  } else {
+    req.body.shipIsBroken = false
+  }
+  Log.updateOne({
+    _id: req.params.id
+  }, req.body, (error, data) => {
+    if (error) {
+      console.error(error);
+      res.json({
+        error: error
+      });
+    } else {
+      res.redirect(`/logs/${req.params.id}`);
+    }
+  });
+});
 
 // Create -- create a new log; the POST route
 app.post('/logs', (req, res) => {
@@ -144,7 +163,7 @@ app.post('/logs', (req, res) => {
 });
 
 // Edit
-app.get('/:id/edit', (req, res) => {
+app.get('/logs/:id/edit', (req, res) => {
   Log.findOne({
     _id: req.params.id
   }, (error, foundLog) => {

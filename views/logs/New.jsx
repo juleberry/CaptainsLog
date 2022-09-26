@@ -3,7 +3,7 @@ const React = require('react');
 const New = (props) => {
   return (
     <div style={{fontFamily: "Tahoma", margin: "1rem"}}>
-      <h1>New Log</h1>
+      <h1 style={{ color: "#873e23", textAlign: "center"}}>New Log</h1>
       {
       /* In here goes your form for creating a new Log */
       <form action="/logs" method="POST">

@@ -8,7 +8,7 @@ const Edit = (props) => {
       <label htmlFor="title">Title:</label>
         <input type="text" name="title" defaultValue={props.log.title} /><br/>
         <label htmlFor="entry">Entry:</label>
-        <input type="textarea" name="entry" defaultValue={props.log.entry} /><br/>
+        <textarea name="entry" defaultValue={props.log.entry} /><br/>
         <label htmlFor="shipIsBroken">Ship Is Broken:</label>
         <input type="checkbox" name="shipIsBroken" defaultValue={props.log.shipIsBroken} /><br/>
         <input style={{marginTop: "10px"}} type="submit" value="Create Log" />
